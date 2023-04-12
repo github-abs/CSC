@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Cherwell API information
+      var cherwellApiUrl = 'https://eagle.cherwellondemand.com/CherwellAPI/api/your-endpoint';
+      var cherwellApiKey = '613b9b9c-6e2e-4d98-bc6d-85923bf85c99';
+
+      $.ajax({
+        url: cherwellApiUrl,
+        type: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Api-Key': cherwellApiKey,
+        },
+        success: function(response) {
+          // Display the Status and Description in HTML
+          $('#incident-status').text(response.status);
+          $('#incident-description').text(response.description);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.error('Error fetching data: ' + textStatus);
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <!-- HTML elements to display the Status and Description -->
+  <div>
+    <h3>Major Incident:</h3>
+    <p>Status: <span id="incident-status"></span></p>
+    <p>Description: <span id="incident-description"></span></p>
+  </div>
+</body>
+</html>
